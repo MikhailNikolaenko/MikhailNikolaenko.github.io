@@ -19,12 +19,23 @@ function displayWordData(data) {
         return;
     }
 
-    let html = `<strong>Definition:</strong> ${data.def[0].tr[0].text}<br>`;
-    if (data.def[0].tr[0].syn) {
-        html += `<strong>Synonyms:</strong> ${data.def[0].tr[0].syn.map(s => s.text).join(', ')}<br>`;
-    }
-    if (data.def[0].tr[0].ant) {
-        html += `<strong>Antonyms:</strong> ${data.def[0].tr[0].ant.map(a => a.text).join(', ')}<br>`;
-    }
+    let html = '<h3>Results:</h3>';
+
+    data.def.forEach(item => {
+        html += `<p><strong>${item.text}</strong> (${item.pos}) - Transcription: ${item.ts}</p>`;
+        if (item.tr && item.tr.length) {
+            html += '<ul>';
+            item.tr.forEach(tr => {
+                html += `<li>${tr.text} (${tr.pos}) - Transcription: ${tr.ts}`;
+                if (tr.syn && tr.syn.length) {
+                    const synonyms = tr.syn.map(syn => `${syn.text} (${syn.pos})`).join(', ');
+                    html += ` - <strong>Synonyms:</strong> ${synonyms}`;
+                }
+                html += '</li>';
+            });
+            html += '</ul>';
+        }
+    });
+
     document.getElementById('output').innerHTML = html;
 }
