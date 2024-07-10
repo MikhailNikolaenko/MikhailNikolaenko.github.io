@@ -1,6 +1,6 @@
 async function getWordData() {
     const word = document.getElementById('wordInput').value;
-    const apiKey = 'YOUR_YANDEX_API_KEY';
+    const apiKey = 'dict.1.1.20240709T010226Z.8e51bfe6c72ce7d9.78ab03abc11253d00871305d5c1c0402a3453adc';
     const url = `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=${apiKey}&lang=en-en&text=${word}`;
 
     try {
